@@ -2,7 +2,9 @@
 
 try {
     $pdo = new PDO(
-
+        'mysql:host=jefu.your-database.de;dbname=veyran_db2;charset=utf8mb4',
+        'veyran_2',
+        'r6]RV=/qjeQd'
     );
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
