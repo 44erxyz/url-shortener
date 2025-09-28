@@ -2,7 +2,7 @@
 
 try {
     $pdo = new PDO(
-        //DEINE SQL VERBINDUNG
+
     );
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {

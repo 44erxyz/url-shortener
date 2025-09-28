@@ -1,5 +1,5 @@
 <?php
-require 'load.php'; // lädt PDO + Shortener-Klasse
+require 'load.php';
 
 $shortLink = '';
 $error = '';
@@ -19,14 +19,78 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['url'])) {
 <head>
     <meta charset="UTF-8">
     <title>44er URL-Shortener</title>
-    <!-- Bootstrap 5.3 CSS lokal -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #181823 0%, #23243a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(10,10,30,0.7);
+            background: rgba(24, 24, 35, 0.95);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(60,60,90,0.3);
+        }
+        .btn-gradient {
+            background: linear-gradient(90deg, #23243a 0%, #3a3a5d 100%);
+            color: #fff;
+            border: none;
+            transition: background 0.3s;
+        }
+        .btn-gradient:hover, .btn-gradient:focus {
+            background: linear-gradient(90deg, #3a3a5d 0%, #23243a 100%);
+            color: #fff;
+        }
+        .main-title {
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #e0e0e0;
+            text-shadow: 0 2px 8px #0008;
+        }
+        .form-label {
+            color: #b0b0c0;
+        }
+        .form-control {
+            background: #23243a;
+            color: #fff;
+            border: 1px solid #3a3a5d;
+        }
+        .form-control:focus {
+            background: #23243a;
+            color: #fff;
+            border-color: #7f53ac;
+        }
+        .alert-success, .alert-danger {
+            background: #23243a;
+            color: #fff;
+            border: 1px solid #3a3a5d;
+        }
+        .alert-success a {
+            color: #b388ff;
+            text-decoration: underline;
+        }
+        .alert-success a:hover {
+            color: #fff;
+        }
+        .btn-outline-light {
+            border-color: #b388ff;
+            color: #b388ff;
+        }
+        .btn-outline-light:hover {
+            background: #b388ff;
+            color: #23243a;
+        }
+    </style>
 </head>
-<body class="bg-light">
-
-<div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card shadow-sm p-4" style="max-width: 500px; width: 100%;">
-        <h1 class="h3 mb-3 text-center">44er URL-Shortener</h1>
+<body>
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg p-5" style="max-width: 500px; width: 100%;">
+        <h1 class="main-title mb-3 text-center">44er URL-Shortener</h1>
 
         <?php if ($error): ?>
             <div class="alert alert-danger" role="alert">
@@ -37,9 +101,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['url'])) {
         <form method="POST" class="mb-3">
             <div class="mb-3">
                 <label for="url" class="form-label">Gib deine URL ein:</label>
-                <input type="url" name="url" class="form-control" id="url" placeholder="https://example.com" required>
+                <input type="url" name="url" class="form-control form-control-lg" id="url" placeholder="https://example.com" required>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Kurzlink erstellen</button>
+            <button type="submit" class="btn btn-gradient btn-lg w-100">Kurzlink erstellen</button>
         </form>
 
         <?php if ($shortLink): ?>
@@ -50,13 +114,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['url'])) {
                         <?= htmlspecialchars($shortLink, ENT_QUOTES, 'UTF-8') ?>
                     </a>
                 </div>
-                <button class="btn btn-outline-secondary btn-sm" onclick="copyLink()">Kopieren</button>
+                <button class="btn btn-outline-light btn-sm" onclick="copyLink()">Kopieren</button>
             </div>
         <?php endif; ?>
     </div>
 </div>
 
-<!-- Bootstrap 5.3 JS lokal -->
 <script src="js/bootstrap.bundle.min.js"></script>
 <script>
     function copyLink() {
@@ -66,6 +129,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['url'])) {
         });
     }
 </script>
-
 </body>
 </html>
