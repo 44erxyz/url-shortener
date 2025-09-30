@@ -1,8 +1,8 @@
 <?php
 class Shortener
 {
-    private $pdo;
-    private $baseUrl;
+    private  \PDO $pdo;
+    private string $baseUrl;
 
     public function __construct($pdo, $baseUrl = "http://veyran.net/")
     {
@@ -10,7 +10,7 @@ class Shortener
         $this->baseUrl = $baseUrl;
     }
 
-    public function shorten($url)
+    public function shorten($url) : string
     {
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
             throw new \InvalidArgumentException("Ungültige URL");
@@ -22,7 +22,7 @@ class Shortener
         return $this->baseUrl . $code;
     }
 
-    private function addUrl($url, $short)
+    private function addUrl($url, $short) : void
     {
 
         $stmt = $this->pdo->prepare(
@@ -34,12 +34,12 @@ class Shortener
         ]);
     }
 
-    private function generateCode()
+    private function generateCode() : string
     {
         return substr(md5(uniqid((string)rand(), true)), 0, 6);
     }
 
-    public function resolve($short)
+    public function resolve($short) : ?string
     {
         $stmt = $this->pdo->prepare(
             "SELECT url FROM url WHERE short = :short LIMIT 1"
