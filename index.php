@@ -6,6 +6,7 @@ $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['url'])) {
     try {
+
         $shortener = new Shortener($pdo, "http://veyran.net/");
         $shortLink = $shortener->shorten(trim($_POST['url']));
     } catch (Exception $e) {
@@ -24,11 +25,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['url'])) {
     <style>
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #181823 0%, #23243a 100%);
+            background-color: #181823;
+            background-image: url("data:image/svg+xml;utf8,<svg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'><rect x='0' y='0' width='40' height='40' fill='none'/><path d='M 40 0 L 0 0 L 0 40' stroke='%233a3a5d' stroke-width='1'/></svg>");
+            background-size: 30px 30px;
+            animation: gridmove 10s linear infinite;
+            color: #f8f9fa;
             display: flex;
             align-items: center;
             justify-content: center;
         }
+        @keyframes gridmove {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+
         .card {
             border-radius: 1.5rem;
             box-shadow: 0 8px 32px 0 rgba(10,10,30,0.7);
@@ -85,9 +95,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['url'])) {
             background: #b388ff;
             color: #23243a;
         }
+
     </style>
 </head>
 <body>
+<?php if ($error): ?>
+    <div class="alert alert-danger" role="alert" style="position: absolute; top: 0; left: 0; width: 100%; border-radius: 0;">
+        <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
+    </div>
+<?php endif; ?>
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card shadow-lg p-5" style="max-width: 500px; width: 100%;">
         <h1 class="main-title mb-3 text-center">44er URL-Shortener</h1>

@@ -10,6 +10,7 @@ class Shortener
         $this->baseUrl = $baseUrl;
     }
 
+
     public function shorten($url) : string
     {
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
