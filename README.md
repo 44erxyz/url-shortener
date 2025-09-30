@@ -10,7 +10,7 @@
 
 ## 🌟 Live Demo
 
-[url-shortener.veyran.net](assests/github-header-banner.png)
+[url-shortener.veyran.net](https://url-shortener.veyran.net)
 
 - Einfach URL eingeben
 - Klick auf „Kurzlink erstellen“
