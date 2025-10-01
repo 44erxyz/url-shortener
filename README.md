@@ -43,4 +43,5 @@
 
 ```bash
 git clone https://github.com/DeinUsername/url-shortener.git
+php - S localhost:8080 for testing
 
