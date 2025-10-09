@@ -1,9 +1,7 @@
 
 
 # 44er URL-Shortener 🚀
-
 ![Banner](assests/github-header-banner.png)
-
 **44er URL-Shortener** ist ein **moderner, sicherer und performanter URL-Kürzer**, geschrieben in **PHP 8+**, mit **PDO**, **Bootstrap 5.3** und **Clipboard-Unterstützung**.
 
 ---
